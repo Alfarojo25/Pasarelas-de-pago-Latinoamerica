@@ -7,3 +7,30 @@
 .pm-table .pm-remove { color:#a00; cursor:pointer; }
 .pm-table .pm-remove:hover { color:#dc3232; }
 .pm-table tbody tr:nth-child(even){ background:#f9f9f9; }
+
+/* Toggle switch estilo */
+.pm-switch { position:relative; display:inline-block; width:42px; height:22px; }
+.pm-switch input { opacity:0; width:0; height:0; }
+.pm-switch span { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#bbb; transition:.3s; border-radius:22px; }
+.pm-switch span:before { position:absolute; content:""; height:18px; width:18px; left:2px; top:2px; background:#fff; transition:.3s; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,.3); }
+.pm-switch input:checked + span { background:#2271b1; }
+.pm-switch input:checked + span:before { transform:translateX(20px); }
+
+/* Multi-select pasarelas */
+/* Lista de pasarelas como switches */
+.pm-gw-list { display:flex; flex-wrap:wrap; gap:6px; max-width:280px; }
+.pm-gw-item { display:flex; align-items:center; gap:4px; background:#f6f7f7; padding:4px 6px; border:1px solid #dcdcde; border-radius:4px; font-size:11px; cursor:pointer; }
+.pm-gw-item:hover { background:#fff; }
+.pm-gw-title { line-height:1.1; max-width:130px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pm-gw-wrapper { display:flex; flex-direction:column; gap:4px; }
+.pm-gw-actions { display:flex; align-items:center; gap:4px; }
+.pm-gw-actions .button.button-small { padding:0 6px; line-height:20px; height:22px; }
+.pm-gw-none { background:#d63638; color:#fff; padding:2px 6px; border-radius:3px; font-size:11px; }
+.pm-gw-count { font-size:11px; color:#555; }
+
+/* Errores visuales */
+.pm-error input[type=text], .pm-error input[type=number] { border-color:#d63638 !important; background:#fff5f5; }
+.pm-error .pm-example:after { content:"!"; display:inline-block; margin-left:4px; color:#d63638; font-weight:bold; }
+
+/* Avisos pequeños */
+.pm-badge-warning { display:inline-block; background:#d63638; color:#fff; padding:2px 6px; font-size:11px; border-radius:3px; margin-left:6px; }

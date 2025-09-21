@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin-monedas 1.2.0-dev\n"
+"Language: fr_FR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Efectivo"
+msgstr "Espèces"
+
+msgid "Magnitud"
+msgstr "Magnitude"
+
+msgid "Seleccionar"
+msgstr "Sélectionner"
+
+msgid "Ese país ya está seleccionado."
+msgstr "Ce pays est déjà sélectionné."
+
+# Nouvelles chaînes
+msgid "Suscripciones Monedas"
+msgstr "Abonnements Monnaies"
+
+msgid "Suscripciones y Pasarelas"
+msgstr "Abonnements & Passerelles"
+
+msgid "Control de captura de pasarela y campos adicionales para renovaciones automáticas."
+msgstr "Contrôle de capture de la passerelle et champs supplémentaires pour renouvellements automatiques."
+
+msgid "Autopago (tokens) habilitado"
+msgstr "Paiement automatique (tokens) activé"
+
+msgid "Permite almacenar token (PayPal Billing Agreement / Mercado Pago card_id) y ejecutar cobro automático en renovaciones."
+msgstr "Permet de stocker un jeton (PayPal Billing Agreement / Mercado Pago card_id) et d'effectuer le prélèvement automatique aux renouvellements."
+
+msgid "Delay reintento (horas)"
+msgstr "Délai de nouvelle tentative (heures)"
+
+msgid "Tiempo tras un fallo antes del único reintento automático."
+msgstr "Temps après un échec avant l'unique nouvelle tentative automatique."
+
+msgid "Activar integración suscripciones"
+msgstr "Activer l'intégration des abonnements"
+
+msgid "Habilita la lógica de retención de pasarela y moneda en renovaciones."
+msgstr "Active la logique de rétention de passerelle et de devise aux renouvellements."
+
+msgid "Campos checkout a guardar"
+msgstr "Champs de checkout à conserver"
+
+msgid "Lista de meta keys (uno por línea) que se copiarán a renovaciones si faltan o requieren sincronización."
+msgstr "Liste des meta keys (une par ligne) copiées aux renouvellements si manquantes ou nécessitant synchronisation."
+
+msgid "Política de tasa (nuevas suscripciones)"
+msgstr "Politique de taux (nouveaux abonnements)"
+
+msgid "Locked: Congelar tasa inicial"
+msgstr "Locked : Geler le taux initial"
+
+msgid "Dynamic: Actualizar en cada renovación"
+msgstr "Dynamic : Mettre à jour à chaque renouvellement"
+
+msgid "Manual Override: Programar o aprobar cambios"
+msgstr "Manual Override : Programmer ou approuver les changements"
+
+msgid "Define la política por defecto para nuevas suscripciones multi-base."
+msgstr "Définit la politique par défaut pour les nouveaux abonnements multi-base."
+
+msgid "Máx entradas historial tasa"
+msgstr "Entrées max historique des taux"
+
+msgid "Se recortan las más antiguas al superar este número."
+msgstr "Les plus anciennes sont supprimées en dépassant ce nombre."
+
+msgid "Retención suscripciones obsoletas (días)"
+msgstr "Rétention abonnements obsolètes (jours)"
+
+msgid "Suscripciones canceladas o sin pago se purgan pasado este periodo."
+msgstr "Abonnements annulés ou impayés purgés après cette période."
+
+msgid "Cancelación rápida usuario"
+msgstr "Annulation rapide utilisateur"
+
+msgid "Permite cancelar escribiendo el usuario en la vista de la suscripción."
+msgstr "Permet l'annulation directe par l'utilisateur dans la vue abonnement."
+
+msgid "Checkbox opt‑in en checkout"
+msgstr "Case opt‑in au checkout"
+
+msgid "Muestra un checkbox debajo de las pasarelas para crear suscripción automática si el usuario está autenticado."
+msgstr "Affiche une case sous les passerelles pour créer un abonnement automatique si l'utilisateur est connecté."
+
+msgid "Opt‑in en página de producto"
+msgstr "Opt‑in sur la page produit"
+
+msgid "Mostrar checkbox antes de agregar al carrito."
+msgstr "Afficher la case avant d'ajouter au panier."
+
+msgid "Opt‑in en carrito"
+msgstr "Opt‑in dans le panier"
+
+msgid "Mostrar fila para convertir el carrito completo en suscripción."
+msgstr "Afficher une ligne pour convertir tout le panier en abonnement."
+
+msgid "Opt‑in post‑compra (gracias)"
+msgstr "Opt‑in post-achat (remerciement)"
+
+msgid "Permite crear una suscripción basada en el pedido desde la página de agradecimiento."
+msgstr "Permet de créer un abonnement basé sur la commande depuis la page de remerciement."
+
+msgid "Intervalos disponibles (días)"
+msgstr "Intervalles disponibles (jours)"
+
+msgid "Lista separada por comas. Ej: 7,30,90. Deben ser enteros positivos."
+msgstr "Liste séparée par des virgules. Ex : 7,30,90. Doivent être des entiers positifs."
+
+msgid "Intervalo por defecto (días)"
+msgstr "Intervalle par défaut (jours)"
+
+msgid "Debe existir dentro de la lista de intervalos disponibles."
+msgstr "Doit exister dans la liste des intervalles disponibles."
+
+msgid "Multi-Base"
+msgstr "Multi-Base"
+
+msgid "Configuración específica para suscripciones con moneda base individual."
+msgstr "Configuration spécifique pour abonnements avec devise de base individuelle."
+
+msgid "Monedas base permitidas"
+msgstr "Devises de base autorisées"
+
+msgid "Seleccionar monedas"
+msgstr "Sélectionner des devises"
+
+msgid "Si se deja vacío se asume que cualquier moneda activa del plugin puede ser base."
+msgstr "Si vide, toute devise active du plugin peut être base."
+
+msgid "Precisión almacenaje tasa"
+msgstr "Précision stockage du taux"
+
+msgid "Número de decimales al normalizar una tasa al guardarla."
+msgstr "Nombre de décimales lors de la normalisation d'un taux à l'enregistrement."
+
+msgid "Aviso moneda base frontend"
+msgstr "Avertissement devise de base frontend"
+
+msgid "Mostrar aviso textual indicando la moneda base al usuario cuando opta por suscripción."
+msgstr "Afficher un texte indiquant la devise de base lorsque l'utilisateur opte pour l'abonnement."
+
+msgid "Autopago – Abandono"
+msgstr "Paiement automatique – Abandon"
+
+msgid "Notificaciones diferidas cuando el autopago ya no reintentará más."
+msgstr "Notifications différées lorsque le paiement auto n'effectuera plus de tentative."
+
+msgid "Email abandono habilitado"
+msgstr "E-mail d'abandon activé"
+
+msgid "Enviar un email diferido tras abandono del autopago."
+msgstr "Envoyer un e-mail différé après l'abandon du paiement auto."
+
+msgid "Delay email abandono (horas)"
+msgstr "Délai e-mail abandon (heures)"
+
+msgid "Horas tras marcar abandono para enviar aviso (usuario + admin)."
+msgstr "Heures après marquage d'abandon pour envoyer l'avis (utilisateur + admin)."

@@ -28,7 +28,72 @@ class Settings {
 		if ( $is_wc_tab || ( isset( $_GET['page'] ) && $_GET['page'] === 'plugin-monedas' ) ) { // phpcs:ignore
 			wp_enqueue_style( 'plugin-monedas-admin', PLUGIN_MONEDAS_URL . 'assets/css/admin-settings.css', [], PLUGIN_MONEDAS_VERSION );
 			wp_enqueue_script( 'plugin-monedas-admin', PLUGIN_MONEDAS_URL . 'assets/js/admin-settings.js', [ 'jquery' ], PLUGIN_MONEDAS_VERSION, true );
+			// Datos para la nueva tabla maestra.
+			$country_currency = self::get_country_currency_map();
+			$symbols = function_exists( 'get_woocommerce_currency_symbols' ) ? get_woocommerce_currency_symbols() : [];
+			$active_gateways = [];
+			if ( class_exists( '\\WC_Payment_Gateways' ) ) {
+				$gws = WC()->payment_gateways();
+				if ( $gws ) {
+					foreach ( $gws->get_available_payment_gateways() as $id => $gw ) {
+						$active_gateways[] = [ 'id' => sanitize_key( $id ), 'title' => wp_strip_all_tags( $gw->get_title() ) ];
+					}
+				}
+			}
+			$zero_dec = [ 'BIF','CLP','DJF','GNF','JPY','KMF','KRW','MGA','PYG','RWF','UGX','VND','VUV','XAF','XOF','XPF' ];
+			$three_dec = [ 'BHD','IQD','JOD','KWD','LYD','OMR','TND' ];
+			wp_localize_script( 'plugin-monedas-admin', 'PluginMonedasData', [
+				'countryCurrency' => $country_currency,
+				'currencySymbols' => $symbols,
+				'numberFormat' => [
+					'decimal'  => wc_get_price_decimal_separator(),
+					'thousand' => wc_get_price_thousand_separator(),
+				],
+				'zeroDecimals' => $zero_dec,
+				'threeDecimals' => $three_dec,
+				'gateways' => $active_gateways,
+				'i18n' => [
+					'Cash' => __( 'Efectivo', 'plugin-monedas' ),
+					'Magnitud' => __( 'Magnitud', 'plugin-monedas' ),
+					'Select' => __( 'Seleccionar', 'plugin-monedas' ),
+					'Ese país ya está seleccionado.' => __( 'Ese país ya está seleccionado.', 'plugin-monedas' ),
+				],
+				'existing' => [
+					'rates' => self::get_rates_raw(),
+					'cash' => self::get_option_raw( 'plugin_monedas_cash_round_map' ),
+					'mag' => self::get_option_raw( 'plugin_monedas_magnitude_round_map' ),
+					'geo' => self::get_option_raw( 'plugin_monedas_geo_map' ),
+					'decimals' => self::get_option_raw( 'plugin_monedas_decimals' ),
+					'curCountry' => self::get_option_raw( 'plugin_monedas_currency_country_map' ),
+					'exempt' => get_option( 'plugin_monedas_exempt_currencies', '' ),
+					'gatewayMap' => get_option( 'plugin_monedas_gateway_currency_map', '' ),
+				],
+			] );
 		}
+	}
+
+	private static function get_country_currency_map() {
+		// Si WooCommerce está disponible, usamos su lista de países y deducimos moneda desde settings cuando sea posible.
+		if ( function_exists( 'WC' ) && WC()->countries ) {
+			$countries = WC()->countries->countries; // ISO2 => Nombre
+			$map = [];
+			// Mapa manual de país -> moneda (principal) extendido. (Se podría externalizar.)
+			$manual = [
+				'AR'=>'ARS','BO'=>'BOB','BR'=>'BRL','CL'=>'CLP','CO'=>'COP','CR'=>'CRC','EC'=>'USD','SV'=>'USD','GT'=>'GTQ','HN'=>'HNL','MX'=>'MXN','NI'=>'NIO','PA'=>'USD','PY'=>'PYG','PE'=>'PEN','PR'=>'USD','UY'=>'UYU','VE'=>'VES',
+				'US'=>'USD','CA'=>'CAD','ES'=>'EUR','FR'=>'EUR','DE'=>'EUR','IT'=>'EUR','PT'=>'EUR','JP'=>'JPY','GB'=>'GBP','CH'=>'CHF','AU'=>'AUD','NZ'=>'NZD','CN'=>'CNY','IN'=>'INR','ZA'=>'ZAR','KR'=>'KRW'
+			];
+			foreach ( $countries as $code => $name ) {
+				$code = strtoupper( $code );
+				if ( isset( $manual[ $code ] ) ) {
+					$map[ $code ] = [ $manual[ $code ], $name ];
+				}
+			}
+			return $map;
+		}
+		// Fallback estático.
+		return [
+			'AR' => [ 'ARS', __( 'Argentina', 'plugin-monedas' ) ], 'BO' => [ 'BOB', __( 'Bolivia', 'plugin-monedas' ) ], 'BR' => [ 'BRL', __( 'Brasil', 'plugin-monedas' ) ], 'CL' => [ 'CLP', __( 'Chile', 'plugin-monedas' ) ], 'CO' => [ 'COP', __( 'Colombia', 'plugin-monedas' ) ], 'CR' => [ 'CRC', __( 'Costa Rica', 'plugin-monedas' ) ], 'EC' => [ 'USD', __( 'Ecuador', 'plugin-monedas' ) ], 'SV' => [ 'USD', __( 'El Salvador', 'plugin-monedas' ) ], 'GT' => [ 'GTQ', __( 'Guatemala', 'plugin-monedas' ) ], 'HN' => [ 'HNL', __( 'Honduras', 'plugin-monedas' ) ], 'MX' => [ 'MXN', __( 'México', 'plugin-monedas' ) ], 'NI' => [ 'NIO', __( 'Nicaragua', 'plugin-monedas' ) ], 'PA' => [ 'USD', __( 'Panamá', 'plugin-monedas' ) ], 'PY' => [ 'PYG', __( 'Paraguay', 'plugin-monedas' ) ], 'PE' => [ 'PEN', __( 'Perú', 'plugin-monedas' ) ], 'PR' => [ 'USD', __( 'Puerto Rico', 'plugin-monedas' ) ], 'UY' => [ 'UYU', __( 'Uruguay', 'plugin-monedas' ) ], 'VE' => [ 'VES', __( 'Venezuela', 'plugin-monedas' ) ], 'US' => [ 'USD', __( 'Estados Unidos', 'plugin-monedas' ) ], 'CA' => [ 'CAD', __( 'Canadá', 'plugin-monedas' ) ], 'ES' => [ 'EUR', __( 'España', 'plugin-monedas' ) ], 'FR' => [ 'EUR', __( 'Francia', 'plugin-monedas' ) ], 'DE' => [ 'EUR', __( 'Alemania', 'plugin-monedas' ) ], 'IT' => [ 'EUR', __( 'Italia', 'plugin-monedas' ) ], 'PT' => [ 'EUR', __( 'Portugal', 'plugin-monedas' ) ], 'JP' => [ 'JPY', __( 'Japón', 'plugin-monedas' ) ], 'GB' => [ 'GBP', __( 'Reino Unido', 'plugin-monedas' ) ], 'CH' => [ 'CHF', __( 'Suiza', 'plugin-monedas' ) ], 'AU' => [ 'AUD', __( 'Australia', 'plugin-monedas' ) ], 'NZ' => [ 'NZD', __( 'Nueva Zelanda', 'plugin-monedas' ) ], 'CN' => [ 'CNY', __( 'China', 'plugin-monedas' ) ], 'IN' => [ 'INR', __( 'India', 'plugin-monedas' ) ], 'ZA' => [ 'ZAR', __( 'Sudáfrica', 'plugin-monedas' ) ], 'KR' => [ 'KRW', __( 'Corea del Sur', 'plugin-monedas' ) ],
+		];
 	}
 
 	private static function get_option_raw( $name ) { return get_option( $name, '' ); }
@@ -49,126 +114,53 @@ class Settings {
 	}
 
 	private static function render_visual_tables() {
-		// Guardamos contenido real en textareas ocultas para reutilizar sanitización existente.
-		$rates = esc_textarea( self::get_rates_raw() );
-		$cash = esc_textarea( self::get_option_raw( 'plugin_monedas_cash_round_map' ) );
-		$mag  = esc_textarea( self::get_option_raw( 'plugin_monedas_magnitude_round_map' ) );
-		$geo  = esc_textarea( self::get_option_raw( 'plugin_monedas_geo_map' ) );
-		$dec  = esc_textarea( self::get_option_raw( 'plugin_monedas_decimals' ) );
-		$fmt  = esc_textarea( self::get_option_raw( 'plugin_monedas_format_map' ) );
-		$round_mode = get_option( 'plugin_monedas_round_mode', 'none' );
-		$cur_country_map = esc_textarea( self::get_option_raw( 'plugin_monedas_currency_country_map' ) );
-		$force_tax = (int) get_option( 'plugin_monedas_force_tax_country', 0 );
 		$hide_base = (int) get_option( 'plugin_monedas_hide_base', 0 );
 		$convert_totals = (int) get_option( 'plugin_monedas_convert_totals', 0 );
 		$full_multi = (int) get_option( 'plugin_monedas_full_multicurrency', 0 );
 		$geo_auto = (int) get_option( 'plugin_monedas_geo_auto', 0 );
+		$force_tax = (int) get_option( 'plugin_monedas_force_tax_country', 0 );
 		?>
 		<div class="pm-section">
-			<h3><?php esc_html_e( 'País fiscal según moneda', 'plugin-monedas' ); ?></h3>
-			<p class="description"><?php esc_html_e( 'Si se activa, forzará el país del cliente (para impuestos) cuando seleccione una moneda mapeada aquí.', 'plugin-monedas' ); ?></p>
-			<label><input type="checkbox" name="plugin_monedas_force_tax_country" value="1" <?php checked( $force_tax, 1 ); ?> /> <?php esc_html_e( 'Forzar país fiscal', 'plugin-monedas' ); ?></label>
-			<table class="widefat pm-table" id="pm-table-cur-country">
-				<thead><tr><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'País (ISO2)', 'plugin-monedas' ); ?></th><th></th></tr></thead>
+			<h3><?php esc_html_e( 'Configuración unificada (País / Moneda)', 'plugin-monedas' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'Selecciona el país y la tasa. El símbolo, moneda y decimales se rellenan automáticamente. Puedes definir método de redondeo, impuestos y pasarelas permitidas. El sistema genera el resto de opciones ocultas.', 'plugin-monedas' ); ?></p>
+			<table class="widefat pm-table" id="pm-table-master">
+				<thead>
+				<tr>
+					<th><?php esc_html_e( 'País', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Símbolo', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Tasa', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Decimales', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Redondeo', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Parámetro', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Impuestos', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Pasarelas', 'plugin-monedas' ); ?></th>
+					<th><?php esc_html_e( 'Ejemplo', 'plugin-monedas' ); ?></th>
+					<th></th>
+				</tr>
+				</thead>
 				<tbody></tbody>
 			</table>
-			<p><button type="button" class="button" data-pm-add-row="cur-country"><?php esc_html_e( 'Añadir relación', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_currency_country_map" id="plugin_monedas_currency_country_map" class="pm-hidden" hidden><?php echo $cur_country_map; ?></textarea>
+			<p><button type="button" class="button" id="pm-master-add"><?php esc_html_e( 'Añadir fila', 'plugin-monedas' ); ?></button></p>
+			<!-- Textareas ocultas legacy -->
+			<textarea name="plugin_monedas_rates" id="plugin_monedas_rates" hidden></textarea>
+			<textarea name="plugin_monedas_cash_round_map" id="plugin_monedas_cash_round_map" hidden></textarea>
+			<textarea name="plugin_monedas_magnitude_round_map" id="plugin_monedas_magnitude_round_map" hidden></textarea>
+			<textarea name="plugin_monedas_geo_map" id="plugin_monedas_geo_map" hidden></textarea>
+			<textarea name="plugin_monedas_currency_country_map" id="plugin_monedas_currency_country_map" hidden></textarea>
+			<textarea name="plugin_monedas_decimals" id="plugin_monedas_decimals" hidden></textarea>
+			<textarea name="plugin_monedas_gateway_currency_map" id="plugin_monedas_gateway_currency_map" hidden></textarea>
+			<textarea name="plugin_monedas_exempt_currencies" id="plugin_monedas_exempt_currencies" hidden></textarea>
 		</div>
 		<div class="pm-section">
-			<h3><?php esc_html_e( 'Tasas de cambio', 'plugin-monedas' ); ?></h3>
-			<p class="description"><?php esc_html_e( 'Moneda secundaria respecto a la moneda base de WooCommerce.', 'plugin-monedas' ); ?></p>
-			<table class="widefat pm-table" id="pm-table-rates">
-				<thead><tr><th><?php esc_html_e( 'Código', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Símbolo', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Tasa', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p><button type="button" class="button" data-pm-add-row="rates"><?php esc_html_e( 'Añadir moneda', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_rates" id="plugin_monedas_rates" class="pm-hidden" hidden><?php echo $rates; ?></textarea>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Redondeo efectivo (múltiplos)', 'plugin-monedas' ); ?></h3>
-			<table class="widefat pm-table" id="pm-table-cash">
-				<thead><tr><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Incremento (ej: 50, 0.05)', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p class="description"><?php esc_html_e( 'Ajusta el precio al múltiplo más cercano. Ejemplo: CLP con incremento 50 convierte 12,345 → 12,350.', 'plugin-monedas' ); ?></p>
-			<p><button type="button" class="button" data-pm-add-row="cash"><?php esc_html_e( 'Añadir regla', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_cash_round_map" id="plugin_monedas_cash_round_map" class="pm-hidden" hidden><?php echo $cash ? $cash : esc_textarea("CLP|50"); ?></textarea>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Redondeo por magnitud final', 'plugin-monedas' ); ?></h3>
-			<table class="widefat pm-table" id="pm-table-mag">
-				<thead><tr><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Magnitud (1000,100,10,1,0.1)', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Modo', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p class="description"><?php esc_html_e( 'Aplica después del redondeo efectivo. Ejemplo: CLP magnitud 1000 nearest: 12,350 → 12,000 (porque 12,350 está más cerca de 12,000 que de 13,000).', 'plugin-monedas' ); ?></p>
-			<p><button type="button" class="button" data-pm-add-row="mag"><?php esc_html_e( 'Añadir magnitud', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_magnitude_round_map" id="plugin_monedas_magnitude_round_map" class="pm-hidden" hidden><?php echo $mag ? $mag : esc_textarea("CLP|1000|nearest"); ?></textarea>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Mapa País → Moneda', 'plugin-monedas' ); ?></h3>
-			<label><input type="checkbox" name="plugin_monedas_geo_auto" value="1" <?php checked( $geo_auto, 1 ); ?> /> <?php esc_html_e( 'Activar detección automática de país (IP)', 'plugin-monedas' ); ?></label>
-			<table class="widefat pm-table" id="pm-table-geo">
-				<thead><tr><th><?php esc_html_e( 'País (ISO2)', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p><button type="button" class="button" data-pm-add-row="geo"><?php esc_html_e( 'Añadir fila', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_geo_map" id="plugin_monedas_geo_map" class="pm-hidden" hidden><?php echo $geo; ?></textarea>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Formato y Decimales', 'plugin-monedas' ); ?></h3>
-			<table class="widefat pm-table" id="pm-table-dec">
-				<thead><tr><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Decimales', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p><button type="button" class="button" data-pm-add-row="dec"><?php esc_html_e( 'Añadir decimales', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_decimals" id="plugin_monedas_decimals" class="pm-hidden" hidden><?php echo $dec; ?></textarea>
-			<table class="widefat pm-table" id="pm-table-fmt">
-				<thead><tr><th><?php esc_html_e( 'Moneda', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Miles', 'plugin-monedas' ); ?></th><th><?php esc_html_e( 'Decimal', 'plugin-monedas' ); ?></th><th></th></tr></thead>
-				<tbody></tbody>
-			</table>
-			<p><button type="button" class="button" data-pm-add-row="fmt"><?php esc_html_e( 'Añadir formato', 'plugin-monedas' ); ?></button></p>
-			<textarea name="plugin_monedas_format_map" id="plugin_monedas_format_map" class="pm-hidden" hidden><?php echo $fmt; ?></textarea>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Comportamiento', 'plugin-monedas' ); ?></h3>
+			<h3><?php esc_html_e( 'Opciones globales', 'plugin-monedas' ); ?></h3>
 			<p>
 				<label><input type="checkbox" name="plugin_monedas_hide_base" value="1" <?php checked( $hide_base, 1 ); ?> /> <?php esc_html_e( 'Ocultar moneda base en selector', 'plugin-monedas' ); ?></label><br/>
 				<label><input type="checkbox" name="plugin_monedas_convert_totals" value="1" <?php checked( $convert_totals, 1 ); ?> /> <?php esc_html_e( 'Convertir totales visualmente (carrito/checkout)', 'plugin-monedas' ); ?></label><br/>
-				<label><input type="checkbox" name="plugin_monedas_full_multicurrency" value="1" <?php checked( $full_multi, 1 ); ?> /> <?php esc_html_e( 'Multi-moneda real (experimental)', 'plugin-monedas' ); ?></label>
+				<label><input type="checkbox" name="plugin_monedas_full_multicurrency" value="1" <?php checked( $full_multi, 1 ); ?> /> <?php esc_html_e( 'Multi-moneda real (experimental)', 'plugin-monedas' ); ?></label><br/>
+				<label><input type="checkbox" name="plugin_monedas_geo_auto" value="1" <?php checked( $geo_auto, 1 ); ?> /> <?php esc_html_e( 'Geolocalización automática (IP)', 'plugin-monedas' ); ?></label><br/>
+				<label><input type="checkbox" name="plugin_monedas_force_tax_country" value="1" <?php checked( $force_tax, 1 ); ?> /> <?php esc_html_e( 'Forzar país fiscal según moneda', 'plugin-monedas' ); ?></label>
 			</p>
-			<p>
-				<label for="plugin_monedas_gateway_currency_map"><strong><?php esc_html_e( 'Pasarelas permitidas por moneda', 'plugin-monedas' ); ?></strong></label><br/>
-				<textarea name="plugin_monedas_gateway_currency_map" id="plugin_monedas_gateway_currency_map" rows="6" cols="60" class="code" placeholder="stripe|USD,EUR\npaypal|USD,EUR,MXN\ntransfer|CLP,ARS\n"><?php echo esc_textarea( get_option( 'plugin_monedas_gateway_currency_map', '' ) ); ?></textarea>
-				<span class="description"><?php esc_html_e( 'Formato: gateway_id|MONEDA1,MONEDA2. Si la moneda seleccionada no está listada, la pasarela se oculta.', 'plugin-monedas' ); ?></span>
-			</p>
-			<p>
-				<label for="plugin_monedas_round_mode"><strong><?php esc_html_e( 'Modo de redondeo base', 'plugin-monedas' ); ?></strong></label>
-				<select name="plugin_monedas_round_mode" id="plugin_monedas_round_mode">
-					<option value="none" <?php selected( $round_mode, 'none' ); ?>><?php esc_html_e( 'Sin extra', 'plugin-monedas' ); ?></option>
-					<option value="round" <?php selected( $round_mode, 'round' ); ?>>round()</option>
-					<option value="floor" <?php selected( $round_mode, 'floor' ); ?>>floor()</option>
-					<option value="ceil" <?php selected( $round_mode, 'ceil' ); ?>>ceil()</option>
-				</select>
-			</p>
-		</div>
-		<div class="pm-section">
-			<h3><?php esc_html_e( 'Exenciones de impuestos', 'plugin-monedas' ); ?></h3>
-			<p class="description"><?php esc_html_e( 'Listado opcional de monedas, países o roles de usuario que deben quedar exentos (impuesto 0). Se aplica antes del cálculo.', 'plugin-monedas' ); ?></p>
-			<table class="form-table">
-				<tr>
-					<th><?php esc_html_e( 'Monedas exentas', 'plugin-monedas' ); ?></th>
-					<td><textarea name="plugin_monedas_exempt_currencies" id="plugin_monedas_exempt_currencies" rows="4" cols="25" class="code" placeholder="CLP\nUSD"><?php echo esc_textarea( get_option( 'plugin_monedas_exempt_currencies', '' ) ); ?></textarea><p class="description"><?php esc_html_e( 'Una por línea. Si la moneda del carrito coincide, impuestos = 0.', 'plugin-monedas' ); ?></p></td>
-				</tr>
-				<tr>
-					<th><?php esc_html_e( 'Países exentos', 'plugin-monedas' ); ?></th>
-					<td><textarea name="plugin_monedas_exempt_countries" id="plugin_monedas_exempt_countries" rows="4" cols="25" class="code" placeholder="CL\nUS"><?php echo esc_textarea( get_option( 'plugin_monedas_exempt_countries', '' ) ); ?></textarea><p class="description"><?php esc_html_e( 'ISO2. Si el país fiscal coincide, impuestos = 0.', 'plugin-monedas' ); ?></p></td>
-				</tr>
-				<tr>
-					<th><?php esc_html_e( 'Roles exentos', 'plugin-monedas' ); ?></th>
-					<td><textarea name="plugin_monedas_exempt_roles" id="plugin_monedas_exempt_roles" rows="4" cols="25" class="code" placeholder="ngo\npartner"><?php echo esc_textarea( get_option( 'plugin_monedas_exempt_roles', '' ) ); ?></textarea><p class="description"><?php esc_html_e( 'Slugs de roles (ej: customer, ngo, suscriptor). Si alguno coincide con el usuario logueado, impuestos = 0.', 'plugin-monedas' ); ?></p></td>
-				</tr>
-			</table>
 		</div>
 		<?php
 	}

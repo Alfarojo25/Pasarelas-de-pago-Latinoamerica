@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin-monedas 1.2.0-dev\n"
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Efectivo"
+msgstr "Dinheiro"
+
+msgid "Magnitud"
+msgstr "Magnitude"
+
+msgid "Seleccionar"
+msgstr "Selecionar"
+
+msgid "Ese país ya está seleccionado."
+msgstr "Esse país já foi selecionado."
+
+# Novas strings
+msgid "Suscripciones Monedas"
+msgstr "Assinaturas Moedas"
+
+msgid "Suscripciones y Pasarelas"
+msgstr "Assinaturas e Gateways"
+
+msgid "Control de captura de pasarela y campos adicionales para renovaciones automáticas."
+msgstr "Controle de captura do gateway e campos extras para renovações automáticas."
+
+msgid "Autopago (tokens) habilitado"
+msgstr "Autopagamento (tokens) habilitado"
+
+msgid "Permite almacenar token (PayPal Billing Agreement / Mercado Pago card_id) y ejecutar cobro automático en renovaciones."
+msgstr "Permite armazenar token (PayPal Billing Agreement / Mercado Pago card_id) e executar cobrança automática nas renovações."
+
+msgid "Delay reintento (horas)"
+msgstr "Atraso do retry (horas)"
+
+msgid "Tiempo tras un fallo antes del único reintento automático."
+msgstr "Tempo após uma falha antes do único retry automático."
+
+msgid "Activar integración suscripciones"
+msgstr "Ativar integração de assinaturas"
+
+msgid "Habilita la lógica de retención de pasarela y moneda en renovaciones."
+msgstr "Habilita a lógica de retenção de gateway e moeda nas renovações."
+
+msgid "Campos checkout a guardar"
+msgstr "Campos do checkout a guardar"
+
+msgid "Lista de meta keys (uno por línea) que se copiarán a renovaciones si faltan o requieren sincronización."
+msgstr "Lista de meta keys (uma por linha) copiadas às renovações se faltarem ou precisarem sincronização."
+
+msgid "Política de tasa (nuevas suscripciones)"
+msgstr "Política de taxa (novas assinaturas)"
+
+msgid "Locked: Congelar tasa inicial"
+msgstr "Locked: Congelar taxa inicial"
+
+msgid "Dynamic: Actualizar en cada renovación"
+msgstr "Dynamic: Atualizar em cada renovação"
+
+msgid "Manual Override: Programar o aprobar cambios"
+msgstr "Manual Override: Programar ou aprovar mudanças"
+
+msgid "Define la política por defecto para nuevas suscripciones multi-base."
+msgstr "Define a política padrão para novas assinaturas multi-base."
+
+msgid "Máx entradas historial tasa"
+msgstr "Máx entradas histórico de taxa"
+
+msgid "Se recortan las más antiguas al superar este número."
+msgstr "As mais antigas são removidas ao exceder este número."
+
+msgid "Retención suscripciones obsoletas (días)"
+msgstr "Retenção assinaturas obsoletas (dias)"
+
+msgid "Suscripciones canceladas o sin pago se purgan pasado este periodo."
+msgstr "Assinaturas canceladas ou sem pagamento são removidas após este período."
+
+msgid "Cancelación rápida usuario"
+msgstr "Cancelamento rápido usuário"
+
+msgid "Permite cancelar escribiendo el usuario en la vista de la suscripción."
+msgstr "Permite cancelar diretamente pelo usuário na visualização da assinatura."
+
+msgid "Checkbox opt‑in en checkout"
+msgstr "Checkbox opt‑in no checkout"
+
+msgid "Muestra un checkbox debajo de las pasarelas para crear suscripción automática si el usuario está autenticado."
+msgstr "Mostra um checkbox abaixo dos gateways para criar assinatura automática se o usuário estiver logado."
+
+msgid "Opt‑in en página de producto"
+msgstr "Opt‑in na página do produto"
+
+msgid "Mostrar checkbox antes de agregar al carrito."
+msgstr "Mostrar checkbox antes de adicionar ao carrinho."
+
+msgid "Opt‑in en carrito"
+msgstr "Opt‑in no carrinho"
+
+msgid "Mostrar fila para convertir el carrito completo en suscripción."
+msgstr "Mostrar linha para converter todo o carrinho em assinatura."
+
+msgid "Opt‑in post‑compra (gracias)"
+msgstr "Opt‑in pós-compra (obrigado)"
+
+msgid "Permite crear una suscripción basada en el pedido desde la página de agradecimiento."
+msgstr "Permite criar uma assinatura baseada no pedido na página de agradecimento."
+
+msgid "Intervalos disponibles (días)"
+msgstr "Intervalos disponíveis (dias)"
+
+msgid "Lista separada por comas. Ej: 7,30,90. Deben ser enteros positivos."
+msgstr "Lista separada por vírgulas. Ex: 7,30,90. Devem ser inteiros positivos."
+
+msgid "Intervalo por defecto (días)"
+msgstr "Intervalo padrão (dias)"
+
+msgid "Debe existir dentro de la lista de intervalos disponibles."
+msgstr "Deve existir dentro da lista de intervalos disponíveis."
+
+msgid "Multi-Base"
+msgstr "Multi-Base"
+
+msgid "Configuración específica para suscripciones con moneda base individual."
+msgstr "Configuração específica para assinaturas com moeda base individual."
+
+msgid "Monedas base permitidas"
+msgstr "Moedas base permitidas"
+
+msgid "Seleccionar monedas"
+msgstr "Selecionar moedas"
+
+msgid "Si se deja vacío se asume que cualquier moneda activa del plugin puede ser base."
+msgstr "Se vazio assume-se que qualquer moeda ativa pode ser base."
+
+msgid "Precisión almacenaje tasa"
+msgstr "Precisão armazenamento da taxa"
+
+msgid "Número de decimales al normalizar una tasa al guardarla."
+msgstr "Número de decimais ao normalizar a taxa ao salvar."
+
+msgid "Aviso moneda base frontend"
+msgstr "Aviso moeda base frontend"
+
+msgid "Mostrar aviso textual indicando la moneda base al usuario cuando opta por suscripción."
+msgstr "Mostrar aviso textual indicando a moeda base quando o usuário opta pela assinatura."
+
+msgid "Autopago – Abandono"
+msgstr "Autopagamento – Abandono"
+
+msgid "Notificaciones diferidas cuando el autopago ya no reintentará más."
+msgstr "Notificações diferidas quando o autopagamento não tentará novamente."
+
+msgid "Email abandono habilitado"
+msgstr "Email de abandono habilitado"
+
+msgid "Enviar un email diferido tras abandono del autopago."
+msgstr "Enviar um email diferido após abandono do autopagamento."
+
+msgid "Delay email abandono (horas)"
+msgstr "Delay email abandono (horas)"
+
+msgid "Horas tras marcar abandono para enviar aviso (usuario + admin)."
+msgstr "Horas após marcar abandono para enviar aviso (usuário + admin)."

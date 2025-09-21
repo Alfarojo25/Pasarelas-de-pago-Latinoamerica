@@ -1,0 +1,167 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin-monedas 1.1.0\n"
+"Language: es_ES\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Traducciones español (idénticas en muchos casos al msgid original)
+msgid "Efectivo"
+msgstr "Efectivo"
+
+msgid "Magnitud"
+msgstr "Magnitud"
+
+msgid "Seleccionar"
+msgstr "Seleccionar"
+
+msgid "Ese país ya está seleccionado."
+msgstr "Ese país ya está seleccionado."
+
+# Nuevas cadenas suscripciones / multi-base / autopay abandono
+msgid "Suscripciones Monedas"
+msgstr "Suscripciones Monedas"
+
+msgid "Suscripciones y Pasarelas"
+msgstr "Suscripciones y Pasarelas"
+
+msgid "Control de captura de pasarela y campos adicionales para renovaciones automáticas."
+msgstr "Control de captura de pasarela y campos adicionales para renovaciones automáticas."
+
+msgid "Autopago (tokens) habilitado"
+msgstr "Autopago (tokens) habilitado"
+
+msgid "Permite almacenar token (PayPal Billing Agreement / Mercado Pago card_id) y ejecutar cobro automático en renovaciones."
+msgstr "Permite almacenar token (PayPal Billing Agreement / Mercado Pago card_id) y ejecutar cobro automático en renovaciones."
+
+msgid "Delay reintento (horas)"
+msgstr "Delay reintento (horas)"
+
+msgid "Tiempo tras un fallo antes del único reintento automático."
+msgstr "Tiempo tras un fallo antes del único reintento automático."
+
+msgid "Activar integración suscripciones"
+msgstr "Activar integración suscripciones"
+
+msgid "Habilita la lógica de retención de pasarela y moneda en renovaciones."
+msgstr "Habilita la lógica de retención de pasarela y moneda en renovaciones."
+
+msgid "Campos checkout a guardar"
+msgstr "Campos checkout a guardar"
+
+msgid "Lista de meta keys (uno por línea) que se copiarán a renovaciones si faltan o requieren sincronización."
+msgstr "Lista de meta keys (uno por línea) que se copiarán a renovaciones si faltan o requieren sincronización."
+
+msgid "Política de tasa (nuevas suscripciones)"
+msgstr "Política de tasa (nuevas suscripciones)"
+
+msgid "Locked: Congelar tasa inicial"
+msgstr "Locked: Congelar tasa inicial"
+
+msgid "Dynamic: Actualizar en cada renovación"
+msgstr "Dynamic: Actualizar en cada renovación"
+
+msgid "Manual Override: Programar o aprobar cambios"
+msgstr "Manual Override: Programar o aprobar cambios"
+
+msgid "Define la política por defecto para nuevas suscripciones multi-base."
+msgstr "Define la política por defecto para nuevas suscripciones multi-base."
+
+msgid "Máx entradas historial tasa"
+msgstr "Máx entradas historial tasa"
+
+msgid "Se recortan las más antiguas al superar este número."
+msgstr "Se recortan las más antiguas al superar este número."
+
+msgid "Retención suscripciones obsoletas (días)"
+msgstr "Retención suscripciones obsoletas (días)"
+
+msgid "Suscripciones canceladas o sin pago se purgan pasado este periodo."
+msgstr "Suscripciones canceladas o sin pago se purgan pasado este periodo."
+
+msgid "Cancelación rápida usuario"
+msgstr "Cancelación rápida usuario"
+
+msgid "Permite cancelar escribiendo el usuario en la vista de la suscripción."
+msgstr "Permite cancelar escribiendo el usuario en la vista de la suscripción."
+
+msgid "Checkbox opt‑in en checkout"
+msgstr "Checkbox opt‑in en checkout"
+
+msgid "Muestra un checkbox debajo de las pasarelas para crear suscripción automática si el usuario está autenticado."
+msgstr "Muestra un checkbox debajo de las pasarelas para crear suscripción automática si el usuario está autenticado."
+
+msgid "Opt‑in en página de producto"
+msgstr "Opt‑in en página de producto"
+
+msgid "Mostrar checkbox antes de agregar al carrito."
+msgstr "Mostrar checkbox antes de agregar al carrito."
+
+msgid "Opt‑in en carrito"
+msgstr "Opt‑in en carrito"
+
+msgid "Mostrar fila para convertir el carrito completo en suscripción."
+msgstr "Mostrar fila para convertir el carrito completo en suscripción."
+
+msgid "Opt‑in post‑compra (gracias)"
+msgstr "Opt‑in post‑compra (gracias)"
+
+msgid "Permite crear una suscripción basada en el pedido desde la página de agradecimiento."
+msgstr "Permite crear una suscripción basada en el pedido desde la página de agradecimiento."
+
+msgid "Intervalos disponibles (días)"
+msgstr "Intervalos disponibles (días)"
+
+msgid "Lista separada por comas. Ej: 7,30,90. Deben ser enteros positivos."
+msgstr "Lista separada por comas. Ej: 7,30,90. Deben ser enteros positivos."
+
+msgid "Intervalo por defecto (días)"
+msgstr "Intervalo por defecto (días)"
+
+msgid "Debe existir dentro de la lista de intervalos disponibles."
+msgstr "Debe existir dentro de la lista de intervalos disponibles."
+
+msgid "Multi-Base"
+msgstr "Multi-Base"
+
+msgid "Configuración específica para suscripciones con moneda base individual."
+msgstr "Configuración específica para suscripciones con moneda base individual."
+
+msgid "Monedas base permitidas"
+msgstr "Monedas base permitidas"
+
+msgid "Seleccionar monedas"
+msgstr "Seleccionar monedas"
+
+msgid "Si se deja vacío se asume que cualquier moneda activa del plugin puede ser base."
+msgstr "Si se deja vacío se asume que cualquier moneda activa del plugin puede ser base."
+
+msgid "Precisión almacenaje tasa"
+msgstr "Precisión almacenaje tasa"
+
+msgid "Número de decimales al normalizar una tasa al guardarla."
+msgstr "Número de decimales al normalizar una tasa al guardarla."
+
+msgid "Aviso moneda base frontend"
+msgstr "Aviso moneda base frontend"
+
+msgid "Mostrar aviso textual indicando la moneda base al usuario cuando opta por suscripción."
+msgstr "Mostrar aviso textual indicando la moneda base al usuario cuando opta por suscripción."
+
+msgid "Autopago – Abandono"
+msgstr "Autopago – Abandono"
+
+msgid "Notificaciones diferidas cuando el autopago ya no reintentará más."
+msgstr "Notificaciones diferidas cuando el autopago ya no reintentará más."
+
+msgid "Email abandono habilitado"
+msgstr "Email abandono habilitado"
+
+msgid "Enviar un email diferido tras abandono del autopago."
+msgstr "Enviar un email diferido tras abandono del autopago."
+
+msgid "Delay email abandono (horas)"
+msgstr "Delay email abandono (horas)"
+
+msgid "Horas tras marcar abandono para enviar aviso (usuario + admin)."
+msgstr "Horas tras marcar abandono para enviar aviso (usuario + admin)."

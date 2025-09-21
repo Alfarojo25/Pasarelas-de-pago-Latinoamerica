@@ -183,3 +183,164 @@ msgstr ""
 #: includes/class-settings.php
 msgid "Formato: gateway_id|MONEDA1,MONEDA2. Si la moneda seleccionada no está listada, la pasarela se oculta."
 msgstr ""
+
+#: JS unified table additions
+msgid "Efectivo"
+msgstr ""
+
+msgid "Magnitud"
+msgstr ""
+
+msgid "Seleccionar"
+msgstr ""
+
+msgid "Ese país ya está seleccionado."
+msgstr ""
+
+#: includes/class-subscriptions-settings.php
+msgid "Suscripciones Monedas"
+msgstr ""
+
+msgid "Suscripciones y Pasarelas"
+msgstr ""
+
+msgid "Control de captura de pasarela y campos adicionales para renovaciones automáticas."
+msgstr ""
+
+msgid "Autopago (tokens) habilitado"
+msgstr ""
+
+msgid "Permite almacenar token (PayPal Billing Agreement / Mercado Pago card_id) y ejecutar cobro automático en renovaciones."
+msgstr ""
+
+msgid "Delay reintento (horas)"
+msgstr ""
+
+msgid "Tiempo tras un fallo antes del único reintento automático."
+msgstr ""
+
+msgid "Activar integración suscripciones"
+msgstr ""
+
+msgid "Habilita la lógica de retención de pasarela y moneda en renovaciones."
+msgstr ""
+
+msgid "Campos checkout a guardar"
+msgstr ""
+
+msgid "Lista de meta keys (uno por línea) que se copiarán a renovaciones si faltan o requieren sincronización."
+msgstr ""
+
+msgid "Política de tasa (nuevas suscripciones)"
+msgstr ""
+
+msgid "Locked: Congelar tasa inicial"
+msgstr ""
+
+msgid "Dynamic: Actualizar en cada renovación"
+msgstr ""
+
+msgid "Manual Override: Programar o aprobar cambios"
+msgstr ""
+
+msgid "Define la política por defecto para nuevas suscripciones multi-base."
+msgstr ""
+
+msgid "Máx entradas historial tasa"
+msgstr ""
+
+msgid "Se recortan las más antiguas al superar este número."
+msgstr ""
+
+msgid "Retención suscripciones obsoletas (días)"
+msgstr ""
+
+msgid "Suscripciones canceladas o sin pago se purgan pasado este periodo."
+msgstr ""
+
+msgid "Cancelación rápida usuario"
+msgstr ""
+
+msgid "Permite cancelar escribiendo el usuario en la vista de la suscripción."
+msgstr ""
+
+msgid "Checkbox opt‑in en checkout"
+msgstr ""
+
+msgid "Muestra un checkbox debajo de las pasarelas para crear suscripción automática si el usuario está autenticado."
+msgstr ""
+
+msgid "Opt‑in en página de producto"
+msgstr ""
+
+msgid "Mostrar checkbox antes de agregar al carrito."
+msgstr ""
+
+msgid "Opt‑in en carrito"
+msgstr ""
+
+msgid "Mostrar fila para convertir el carrito completo en suscripción."
+msgstr ""
+
+msgid "Opt‑in post‑compra (gracias)"
+msgstr ""
+
+msgid "Permite crear una suscripción basada en el pedido desde la página de agradecimiento."
+msgstr ""
+
+msgid "Intervalos disponibles (días)"
+msgstr ""
+
+msgid "Lista separada por comas. Ej: 7,30,90. Deben ser enteros positivos."
+msgstr ""
+
+msgid "Intervalo por defecto (días)"
+msgstr ""
+
+msgid "Debe existir dentro de la lista de intervalos disponibles."
+msgstr ""
+
+msgid "Multi-Base"
+msgstr ""
+
+msgid "Configuración específica para suscripciones con moneda base individual."
+msgstr ""
+
+msgid "Monedas base permitidas"
+msgstr ""
+
+msgid "Seleccionar monedas"
+msgstr ""
+
+msgid "Si se deja vacío se asume que cualquier moneda activa del plugin puede ser base."
+msgstr ""
+
+msgid "Precisión almacenaje tasa"
+msgstr ""
+
+msgid "Número de decimales al normalizar una tasa al guardarla."
+msgstr ""
+
+msgid "Aviso moneda base frontend"
+msgstr ""
+
+msgid "Mostrar aviso textual indicando la moneda base al usuario cuando opta por suscripción."
+msgstr ""
+
+msgid "Autopago – Abandono"
+msgstr ""
+
+msgid "Notificaciones diferidas cuando el autopago ya no reintentará más."
+msgstr ""
+
+msgid "Email abandono habilitado"
+msgstr ""
+
+msgid "Enviar un email diferido tras abandono del autopago."
+msgstr ""
+
+msgid "Delay email abandono (horas)"
+msgstr ""
+
+msgid "Horas tras marcar abandono para enviar aviso (usuario + admin)."
+msgstr ""
