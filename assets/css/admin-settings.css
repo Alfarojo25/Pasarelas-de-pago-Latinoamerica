@@ -1,0 +1,9 @@
+/* Estilos admin Plugin Monedas */
+.pm-hidden { display:none; }
+.pm-section { margin: 25px 0; background:#fff; padding:15px; border:1px solid #ccd0d4; border-radius:4px; }
+.pm-section h3 { margin-top:0; }
+.pm-table td, .pm-table th { vertical-align:middle; }
+.pm-table input[type=text], .pm-table select { width:100%; }
+.pm-table .pm-remove { color:#a00; cursor:pointer; }
+.pm-table .pm-remove:hover { color:#dc3232; }
+.pm-table tbody tr:nth-child(even){ background:#f9f9f9; }

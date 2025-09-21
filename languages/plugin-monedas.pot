@@ -1,0 +1,185 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plugin Monedas 0.1.0\n"
+"POT-Creation-Date: 2025-09-21 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: manual\n"
+"Language: \n"
+
+#: includes/class-product-prices.php:19
+msgid "Precios por Moneda (Plugin Monedas)"
+msgstr ""
+
+#: includes/class-product-prices.php:25
+msgid "Si estableces un precio aquí para una moneda, se usará en lugar de la conversión automática de la tasa."
+msgstr ""
+
+#: includes/class-product-prices.php:27 includes/class-reporting.php:70
+msgid "Moneda"
+msgstr ""
+
+#: includes/class-product-prices.php:27
+msgid "Regular"
+msgstr ""
+
+#: includes/class-product-prices.php:27
+msgid "Oferta"
+msgstr ""
+
+#: includes/class-product-prices.php:63
+msgid "Precios por moneda"
+msgstr ""
+
+#: includes/class-payment-gateways.php:46
+msgid "El pago se procesará en %s. Mostramos valores en %s como referencia."
+msgstr ""
+
+#: includes/class-reporting.php:23 includes/class-reporting.php:24 includes/class-reporting.php:55
+msgid "Reporte Multi-Moneda"
+msgstr ""
+
+#: includes/class-reporting.php:61
+msgid "Desde"
+msgstr ""
+
+#: includes/class-reporting.php:62
+msgid "Hasta"
+msgstr ""
+
+#: includes/class-reporting.php:63
+msgid "Filtrar"
+msgstr ""
+
+#: includes/class-reporting.php:66
+msgid "No hay pedidos en el rango."
+msgstr ""
+
+#: includes/class-reporting.php:70
+msgid "Pedidos"
+msgstr ""
+
+#: includes/class-reporting.php:70
+msgid "Total Moneda"
+msgstr ""
+
+#: includes/class-reporting.php:70
+msgid "Total Base"
+msgstr ""
+
+#: includes/class-coupon-manager.php:60
+msgid " (Equivalente convertido desde %s %s)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Plugin Monedas - Tasas Manuales"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Tasas"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Decimales por moneda"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Modo de redondeo"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Sin redondeo extra"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "round()"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "floor()"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "ceil()"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Ocultar moneda base"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "No mostrar la moneda base en el selector"
+msgstr ""
+
+#: includes/class-widget-selector.php
+msgid "Selector de Moneda (Plugin Monedas)"
+msgstr ""
+
+#: includes/class-widget-selector.php
+msgid "Muestra un selector de moneda basado en tasas locales."
+msgstr ""
+
+#: includes/class-widget-selector.php
+msgid "Título:"
+msgstr ""
+
+#: plugin-monedas.php (bloque título)
+msgid "Selector Moneda (Plugin Monedas)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Convertir totales (carrito/checkout)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Mostrar subtotales, impuestos y total en moneda seleccionada (solo visual)."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Los cálculos internos permanecen en la moneda base. Usar solo si se entiende la diferencia."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Multi-moneda real (experimental)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Recalcula precios en el carrito y guarda pedidos en la moneda seleccionada."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Desactiva la conversión solo visual de totales. Requiere revisión fiscal (impuestos y redondeos)."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Geolocalización automática"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Detectar país (IP) y elegir moneda según mapa país->moneda."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Mapa país->moneda"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Formato: CC|MONEDA (dos letras país ISO-3166-1 alfa-2). Una por línea."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Formato separadores por moneda"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Formato: MONEDA|miles|decimal. Prioriza sobre ajustes globales de WooCommerce."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Pasarelas permitidas por moneda"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Formato: gateway_id|MONEDA1,MONEDA2. Si la moneda seleccionada no está listada, la pasarela se oculta."
+msgstr ""
